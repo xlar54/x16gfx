@@ -1,0 +1,327 @@
+
+; 64tass Turbo Assembler Macro V1.53.1515 listing file
+; 64tass --m65c02 -m -a -l ./target/x16gfx.lbl -L ./target/x16gfx.lst -o ./target/x16gfx ./src/x16gfx.asm
+; Tue Jun 04 00:46:57 2024
+
+;Offset	;Hex		;Source
+
+;******  Processing input file: ./src/x16gfx.asm
+
+
+;******  Processing file: ./src/x16_regs.asm
+
+=$02			r0	= $02
+=$02			r0L	= $02
+=$03			r0H	= $03
+=$04			r1	= $04
+=$04			r1L	= $04
+=$05			r1H	= $05
+=$06			r2	= $06
+=$06			r2L	= $06
+=$07			r2H	= $07
+=$08			r3	= $08
+=$08			r3L	= $08
+=$09			r3H	= $09
+=$0a			r4	= $0a
+=$0a			r4L	= $0a
+=$0b			r4H	= $0b
+=$0c			r5	= $0c
+=$0c			r5L	= $0c
+=$0d			r5H	= $0d
+=$0e			r6	= $0e
+=$0e			r6L	= $0e
+=$0f			r6H	= $0f
+=$10			r7	= $10
+=$10			r7L	= $10
+=$11			r7H	= $11
+=$12			r8	= $12
+=$12			r8L	= $12
+=$13			r8H	= $13
+=$14			r9	= $14
+=$14			r9L	= $14
+=$15			r9H	= $15
+=$16			r10	= $16
+=$16			r10L	= $16
+=$17			r10H	= $17
+=$18			r11	= $18
+=$18			r11L	= $18
+=$19			r11H	= $19
+=$1a			r12	= $1a
+=$1a			r12L	= $1a
+=$1b			r12H	= $1b
+=$1c			r13	= $1c
+=$1c			r13L	= $1c
+=$1d			r13H	= $1d
+=$1e			r14	= $1e
+=$1e			r14L	= $1e
+=$1f			r14H	= $1f
+=$20			r15	= $20
+=$20			r15L	= $20
+=$21			r15H	= $21
+
+;******  Return to file: ./src/x16gfx.asm
+
+
+;******  Processing file: ./src/x16_vera.asm
+
+=$9f20			VERA_BASE           = $9f20
+=$9f20			VERA_ADDRx_L        = $9f20
+=$9f21			VERA_ADDRx_M        = $9f21
+=$9f22			VERA_ADDRx_H        = $9f22
+=$9f23			VERA_DATA0          = $9f23
+=$9f24			VERA_DATA1          = $9f24
+=$9f25			VERA_CTRL           = $9f25
+=$9f26			VERA_IEN            = $9f26
+=$9f27			VERA_ISR            = $9f27
+=$9f28			VERA_IRQLINE_L      = $9f28 ; write only
+=$9f28			VERA_SCANLINE_L     = $9f28 ; read only
+=$9f29			VERA_DC_VIDEO       = $9f29     ; Active Display Control
+=$9f2a			VERA_DC_HSCALE      = $9f2a     ; Active Display H-Scale
+=$9f2b			VERA_DC_VSCALE      = $9f2b     ; Active Display V-Scale
+=$9f2c			VERA_DC_BORDER      = $9f2c     ; Border Color
+=$9f29			VERA_DC_HSTART      = $9f29     ; Active Display H-Start
+=$9f2a			VERA_DC_HSTOP       = $9f2a     ; Active Display H-Stop
+=$9f2b			VERA_DC_VSTART      = $9f2b     ; Active Display V-Start
+=$9f2c			VERA_DC_VSTOP       = $9f2c     ; Active Display V-Stop
+=$9f29			VERA_FX_CTRL        = $9f29     ; ADDR1 Update Mode / VRAM Data Port Write Mode
+=$9f2a			VERA_FX_TILEBASE    = $9f2a     ; Affine Transformation Tile Base (write only)
+=$9f2b			VERA_FX_MAPBASE     = $9f2b     ; Affine Transformation Map Base (write only)
+=$9f2c			VERA_FX_MULT        = $9f2c     ; Write Cache Index / Multiply-accumulate Mode (write only)
+=$9f29			VERA_FX_X_INCR_L    = $9f29     ; X Position Increment (lower 8 bits) (write only)
+=$9f2a			VERA_FX_X_INCR_H    = $9f2a     ; X Position Increment (upper 8 bits) (write only)
+=$9f2b			VERA_FX_Y_INCR_L    = $9f2b     ; Y Position Increment (lower 8 bits) (write only)
+=$9f2c			VERA_FX_Y_INCR_H    = $9f2c     ; Y Position Increment (upper 8 bits) (write only)
+=$9f29			VERA_FX_X_POS_L     = $9f29     ; Pixel X Position (lower 8 bits) (write only)
+=$9f2a			VERA_FX_X_POS_H     = $9f2a     ; Pixel X Position (upper 3 bits) (write only)
+=$9f2b			VERA_FX_Y_POS_L     = $9f2b     ; Pixel Y Position (lower 8 bits) (write only)
+=$9f2c			VERA_FX_Y_POS_H     = $9f2c     ; Pixel Y Position (upper 3 bits) (write only)
+=$9f29			VERA_FX_X_POS_S     = $9f29     ; Pixel X Fractional Position (upper 8 bits) (write only)
+=$9f2a			VERA_FX_Y_POS_S     = $9f2a     ; Pixel Y Fractional Position (upper 8 bits) (write only)
+=$9f2b			VERA_FX_POLY_FILL_L = $9f2b     ; Fill Length (lower 3 bits) (read only)
+=$9f2c			VERA_FX_POLY_FILL_H = $9f2c     ; Fill Length (upper 7 bits) (read only)
+=$9f29			VERA_FX_CACHE_L     = $9f29     ; 32-bit Write Cache Data  (write only)
+=$9f29			VERA_FX_ACCUM_RESET = $9f29     ; (read only)
+=$9f2a			VERA_FX_CACHE_M     = $9f2a     ; (write only)
+=$9f2a			VERA_FX_ACCUM       = $9f2a     ; (read only)
+=$9f2b			VERAFX_CACHE_H      = $9f2b     ; (write only)
+=$9f2c			VERA_FX_CACHE_U     = $9f2c     ; (write only)
+=$9f29			VERA_DC_VER0        = $9f29      ; Version Number (read only)
+=$9f2a			VERA_DC_VER1        = $9f2a
+=$9f2b			VERA_DC_VER2        = $9f2b
+=$9f2c			VERA_DC_VER3        = $9f2c
+=$9f2d			VERA_L0_CONFIG      = $9f2d
+=$9f2e			VERA_L0_MAPBASE     = $9f2e
+=$9f2f			VERA_L0_TILEBASE    = $9f2f
+=$9f30			VERA_L0_HSCROLL_L   = $9f30
+=$9f31			VERA_L0_HSCROLL_H   = $9f31
+=$9f32			VERA_L0_VSCROLL_L   = $9f32
+=$9f33			VERA_L0_VSCROLL_H   = $9f33
+=$9f34			VERA_L1_CONFIG      = $9f34
+=$9f35			VERA_L1_MAPBASE     = $9f35
+=$9f36			VERA_L1_TILEBASE    = $9f36
+=$9f37			VERA_L1_HSCROLL_L   = $9f37
+=$9f38			VERA_L1_HSCROLL_H   = $9f38
+=$9f39			VERA_L1_VSCROLL_L   = $9f39
+=$9f3a			VERA_L1_VSCROLL_H   = $9f3a
+=$9f3b			VERA_AUDIO_CTRL     = $9f3b
+=$9f3c			VERA_AUDIO_RATE     = $9f3c
+=$9f3d			VERA_AUDIO_DATA     = $9f3d
+=$9f3e			VERA_SPI_DATA       = $9f3e
+=$9f3f			VERA_SPI_CTRL       = $9f3f
+=$ffcf			CHRIN               = $FFCF
+=$ff81			CINT                = $ff81
+
+;******  Return to file: ./src/x16gfx.asm
+
+>0801	0c 08		.byte $0C, $08  ; pointer to next line
+>0803	0a 00		.byte $0A, $00  ; line number (10)
+>0805	9e		.byte $9E       ; SYS token
+>0806	20 32 30 36	.text " 2062"   ; SYS address in ASCII
+>080a	32
+>080b	00 00 00	.byte 0, 0, 0   ; end-of-program
+.080e	20 53 08	    jsr screen_hires
+.0811	20 68 08	    jsr screen_clear
+.0814			loop:
+.0814	ad 51 08	    lda y_loc_lo
+.0817	85 04		    sta r1L
+.0819	ad 52 08	    lda y_loc_hi
+.081c	85 05		    sta r1H
+.081e	a9 40		    lda #$40    ; max $027f / 639
+.0820	85 02		    sta r0L
+.0822	a9 01		    lda #$01
+.0824	85 03		    sta r0H
+.0826	20 bf 08	    jsr set_pixel
+.0829	18		    clc
+.082a	ad 51 08	    lda y_loc_lo
+.082d	69 01		    adc #$01
+.082f	8d 51 08	    sta y_loc_lo
+.0832	ad 52 08	    lda y_loc_hi
+.0835	69 00		    adc #$00
+.0837	8d 52 08	    sta y_loc_hi
+.083a	ad 52 08	    lda y_loc_hi
+.083d	c9 01		    cmp #$01
+.083f	d0 d3		    bne loop
+.0841	ad 51 08	    lda y_loc_lo
+.0844	c9 e0		    cmp #$E0
+.0846	d0 cc		    bne loop
+.0848			wait_key:
+.0848	20 cf ff	    jsr CHRIN
+.084b	f0 fb		    beq wait_key
+.084d	20 81 ff	    jsr CINT
+.0850	60		    rts
+.0851			y_loc_lo
+>0851	00		    .byte $00
+.0852			y_loc_hi
+>0852	00		    .byte $00
+.0853			screen_hires:
+.0853	a9 00		    lda #%00000000      ; DCSEL = 0, VRAM port 1
+.0855	8d 25 9f	    sta VERA_CTRL
+.0858	a9 21		    lda #%00100001
+.085a	8d 29 9f	    sta VERA_DC_VIDEO
+.085d	a9 04		    lda #%00000100
+.085f	8d 34 9f	    sta VERA_L1_CONFIG
+.0862	a9 01		    lda #%00000001
+.0864	8d 36 9f	    sta VERA_L1_TILEBASE
+.0867	60		    rts
+.0868			screen_clear:
+.0868	a9 04		    lda #(2 << 1)
+.086a	8d 25 9f	    sta VERA_CTRL
+.086d	a9 40		    lda #$40
+.086f	0c 29 9f	    tsb VERA_FX_CTRL
+.0872	a9 0c		    lda #(6 << 1)
+.0874	8d 25 9f	    sta VERA_CTRL
+.0877	9c 29 9f	    stz $9f29
+.087a	9c 2a 9f	    stz $9f2a
+.087d	9c 2b 9f	    stz $9f2b
+.0880	9c 2c 9f	    stz $9f2c
+.0883	9c 25 9f	    stz VERA_CTRL
+.0886	9c 20 9f	    stz VERA_ADDRx_L
+.0889	9c 21 9f	    stz VERA_ADDRx_M
+.088c	a9 30		    lda #$30  ; increment +4
+.088e	8d 22 9f	    sta VERA_ADDRx_H
+.0891	a0 f0		    ldy #240 ; number of rows
+.0893			blank_outer:
+.0893	a2 0a		    ldx #10 ; 10 iterations of 32 = one line of 320 at 8bpp
+.0895			blank_loop:
+.0895	9c 23 9f	    stz VERA_DATA0 ; $9f23 each `stz` writes four zeroes to VRAM (cache contents) for a total of 32 pixels when repeated 8x
+.0898	9c 23 9f	    stz VERA_DATA0 ; $9f23 each `stz` writes four zeroes to VRAM (cache contents) for a total of 32 pixels when repeated 8x
+.089b	9c 23 9f	    stz VERA_DATA0 ; $9f23 each `stz` writes four zeroes to VRAM (cache contents) for a total of 32 pixels when repeated 8x
+.089e	9c 23 9f	    stz VERA_DATA0 ; $9f23 each `stz` writes four zeroes to VRAM (cache contents) for a total of 32 pixels when repeated 8x
+.08a1	9c 23 9f	    stz VERA_DATA0 ; $9f23 each `stz` writes four zeroes to VRAM (cache contents) for a total of 32 pixels when repeated 8x
+.08a4	9c 23 9f	    stz VERA_DATA0 ; $9f23 each `stz` writes four zeroes to VRAM (cache contents) for a total of 32 pixels when repeated 8x
+.08a7	9c 23 9f	    stz VERA_DATA0 ; $9f23 each `stz` writes four zeroes to VRAM (cache contents) for a total of 32 pixels when repeated 8x
+.08aa	9c 23 9f	    stz VERA_DATA0 ; $9f23 each `stz` writes four zeroes to VRAM (cache contents) for a total of 32 pixels when repeated 8x
+.08ad	ca		    dex
+.08ae	d0 e5		    bne blank_loop
+.08b0	88		    dey
+.08b1	d0 e0		    bne blank_outer
+.08b3	a9 04		    lda #(2 << 1)
+.08b5	8d 25 9f	    sta VERA_CTRL ; $9f25
+.08b8	9c 29 9f	    stz VERA_FX_CTRL
+.08bb	9c 25 9f	    stz VERA_CTRL
+.08be	60		    rts
+.08bf			set_pixel:
+.08bf	48		    pha
+.08c0	98		    tya
+.08c1	48		    pha
+.08c2	8a		    txa
+.08c3	48		    pha
+.08c4	a5 04		    lda r1L             ; Load y low byte
+.08c6	85 08		    sta r3L
+.08c8	a5 05		    lda r1H
+.08ca	85 09		    sta r3H
+.08cc	a9 50		    lda #$50            ; x 80
+.08ce	85 0a		    sta r4L
+.08d0	a9 00		    lda #$00
+.08d2	85 0b		    sta r4H
+.08d4	20 3e 09	    jsr mult_16x16      ; Multiply by 80
+.08d7	a5 0a		    lda r4L
+.08d9	8d 22 09	    sta rowAddrL        ; Store row address low byte
+.08dc	a5 0b		    lda r4H
+.08de	8d 23 09	    sta rowAddrM
+.08e1	a5 08		    lda r3L             ; Load high byte result
+.08e3	8d 24 09	    sta rowAddrH        ; Store row address high byte
+.08e6	20 26 09	    jsr div_16bit_by_8
+.08e9	a5 0c		    lda r5L
+.08eb	8d 25 09	    sta colAddrL
+.08ee	a5 02		    lda r0L             ; Load x low byte
+.08f0	29 07		    and #7              ; x % 8 (AND with 7)
+.08f2	aa		    tax                 ; Transfer to X for index
+.08f3	18		    clc
+.08f4	ad 22 09	    lda rowAddrL
+.08f7	6d 25 09	    adc colAddrL
+.08fa	8d 20 9f	    sta VERA_ADDRx_L
+.08fd	ad 23 09	    lda rowAddrM
+.0900	69 00		    adc #$00
+.0902	8d 21 9f	    sta VERA_ADDRx_M
+.0905	ad 24 09	    lda rowAddrH
+.0908	8d 22 9f	    sta VERA_ADDRx_H
+.090b	ad 23 9f	    lda VERA_DATA0      ; Load the byte at memory address
+.090e	1d 1a 09	    ora bitMasks,X      ; OR with the bit mask
+.0911	8d 23 9f	    sta VERA_DATA0      ; Store back the modified byte
+.0914	68		    pla
+.0915	aa		    tax
+.0916	68		    pla
+.0917	a8		    tay
+.0918	68		    pla
+.0919	60		    rts
+.091a			bitMasks:
+>091a	80 40 20 10	    .byte %10000000, %01000000, %00100000, %00010000
+>091e	08 04 02 01	    .byte %00001000, %00000100, %00000010, %00000001
+.0922			rowAddrL:
+>0922	00		    .byte 0
+.0923			rowAddrM:
+>0923	00		    .byte 0
+.0924			rowAddrH:
+>0924	00		    .byte 0
+.0925			colAddrL:
+>0925	00		    .byte 0
+.0926			div_16bit_by_8:
+.0926	a5 02		    lda r0l             ; load x low byte
+.0928	85 0c		    sta r5l             ; store low byte in templ
+.092a	a5 03		    lda r0h             ; load x high byte
+.092c	85 0d		    sta r5h             ; store high byte in temph
+.092e	a2 03		    ldx #3              ; set loop counter to 3
+.0930			shift_loop:
+.0930	a5 0d		    lda r5h             ; load high byte
+.0932	4a		    lsr a               ; logical shift right
+.0933	85 0d		    sta r5h             ; store shifted high byte
+.0935	a5 0c		    lda r5l             ; load low byte
+.0937	6a		    ror a               ; rotate right through carry (bringing in bit from high byte)
+.0938	85 0c		    sta r5l             ; store shifted low byte
+.093a	ca		    dex                 ; decrement loop counter
+.093b	d0 f3		    bne shift_loop      ; repeat 3 times
+.093d	60		    rts                 ; return from subroutine
+.093e			mult_16x16:
+.093e	64 0c		    stz r5l
+.0940	64 0d		    stz r5h
+.0942	a5 0a		    lda r4l    ; get the multiplicand and
+.0944	85 0c		    sta r5l    ; put it in the scratchpad.
+.0946	a5 0b		    lda r4h
+.0948	85 0d		    sta r5h
+.094a	a9 00		    lda #$00
+.094c	85 0a		    sta r4l    ; zero-out the original multiplicand area.
+.094e	85 0b		    sta r4h
+.0950	a0 10		    ldy #$10   ; we'll loop 16 times.
+.0952			lp1:
+.0952	06 0a		    asl r4l    ; shift the entire 32 bits over one bit position.
+.0954	26 0b		    rol r4h
+.0956	26 08		    rol r3l
+.0958	26 09		    rol r3h
+.095a	90 13		    bcc lp2    ; skip the adding-in to the result if
+.095c	18		    clc        ; else, add multiplier to intermediate result.
+.095d	a5 0c		    lda r5l
+.095f	65 0a		    adc r4l
+.0961	85 0a		    sta r4l
+.0963	a5 0d		    lda r5h
+.0965	65 0b		    adc r4h
+.0967	85 0b		    sta r4h
+.0969	a9 00		    lda #$00   ; if c=1, incr lo byte of hi cell.
+.096b	65 08		    adc r3l
+.096d	85 08		    sta r3l
+.096f			lp2:
+.096f	88		    dey        ; if we haven't done 16 iterations yet,
+.0970	d0 e0		    bne lp1    ; then go around again.
+.0972	60		    rts
+
+;******  End of listing
