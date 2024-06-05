@@ -1,3 +1,3 @@
-64tass --m65c02 -m -a ./src/x16gfx.asm -l ./target/x16gfx.lbl -L ./target/x16gfx.lst -o ./target/x16gfx
-del F:\Software\Emulation\X16\x16gfx
-copy .\target\x16gfx F:\Software\Emulation\X16\x16gfx
+64tass --m65c02 -m -a ./src/x16_demo1.asm -l ./target/x16_demo1.lbl -L ./target/x16_demo1.lst -o ./target/demo1
+del F:\Software\Emulation\X16\demo1
+copy .\target\demo1 F:\Software\Emulation\X16\demo1

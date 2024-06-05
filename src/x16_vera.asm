@@ -102,5 +102,30 @@ VERA_SPI_CTRL       = $9f3f
 
 ; kernal
 
-CHRIN               = $FFCF
-CINT                = $ff81
+
+CINT        = $ff81
+READST      = $ffb7
+SETLFS      = $ffba
+SETNAM      = $ffbd
+OPEN        = $ffc0
+CLOSE       = $ffc3
+CHKIN       = $ffc6
+CHKOUT      = $ffc9
+CHRIN       = $FFCF
+CHROUT      = $ffd2
+LOAD        = $ffd5
+SAVE        = $ffd8
+CLALL       = $ffe7
+SETMSG      = $ff90
+ACPTR       = $ffa5
+CIOUT       = $ffa8
+UNTALK      = $ffab
+UNLSN       = $ffae
+LISTEN      = $ffb1
+TALK        = $ffb4
+SECOND      = $ff93
+TALKSA      = $ff96
+CLRCHN      = $ffcc
+GETIN       = $ffe4
+SCREEN_MODE = $ff5f
+STATUS      = $0287
