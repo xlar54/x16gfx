@@ -18,47 +18,85 @@
     jsr screen_hires
     jsr screen_clear
 
-loop:
-    ; r0 = left   
-    lda #$40    ; max $027f / 639
+
+    ; draw a line from 320,0 to 320,480 using "vertical_line"
+
+    ; x1 = 320
+    lda #$40
     sta r0L
     lda #$01
     sta r0H
 
-    ; r1 = top
-    lda y_loc_lo
+    ; y1 = 0
+    lda #$00
     sta r1L
-    lda y_loc_hi
+    lda #$00
     sta r1H
 
-    jsr set_pixel
+    ; y2 = 480
+    lda #$e0
+    sta r2L
+    lda #$01
+    sta r2H
 
-    clc
-    lda y_loc_lo
-    adc #$01
-    sta y_loc_lo
-    lda y_loc_hi
-    adc #$00
-    sta y_loc_hi
+    jsr vertical_line
 
-    ; Check if we've reached 480 ($01E0)
-    lda y_loc_hi
-    cmp #$01
-    bne loop
-    lda y_loc_lo
-    cmp #$E0
-    bne loop
+    ; draw a line from 0,240 to 640, 240 using "horizontal_line"
+
+    ; x1 = 0
+    lda #$00
+    sta r0L
+    lda #$00
+    sta r0H
+
+    ; y1 = 240
+    lda #$f0
+    sta r1L
+    lda #$00
+    sta r1H
+
+    ; x2 = 640
+    lda #$80
+    sta r2L
+    lda #$02
+    sta r2H
+    
+    jsr horizontal_line
+
+
+    ; draw a rectangle
+
+    ; x1 = 10
+    lda #$0a
+    sta r0L
+    lda #$00
+    sta r0H
+
+    ; y1 = 10
+    lda #$0a
+    sta r1L
+    lda #$00
+    sta r1H
+
+    ; x2 = 20
+    lda #$14
+    sta r2L
+    lda #$00
+    sta r2H
+
+    ; y2 = 20
+    lda #$19
+    sta r3L
+    lda #$00
+    sta r3H
+    
+    jsr horizontal_line
 
 wait_key:
     jsr CHRIN
     beq wait_key
     jsr CINT
     rts
-
-y_loc_lo
-    .byte $00
-y_loc_hi
-    .byte $00
 
 .include "x16_font.asm"
 .include "x16_hireslib.asm"

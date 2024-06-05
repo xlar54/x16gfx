@@ -123,11 +123,6 @@ blank_loop:
 ; =============================================================
 set_pixel:
     .block
-    pha
-    tya
-    pha
-    txa
-    pha
 
     ; Calculate Row Address
     lda r1L             ; Load y low byte
@@ -171,12 +166,6 @@ set_pixel:
     lda VERA_DATA0      ; Load the byte at memory address
     ora bitMasks,X      ; OR with the bit mask
     sta VERA_DATA0      ; Store back the modified byte
-    
-    pla
-    tax
-    pla
-    tay
-    pla
 
     rts
 
@@ -195,6 +184,182 @@ colAddrL:
     .byte 0
     .bend
 
+; =============================================================
+; vertical_line
+; r0 = x1
+; r1 = y1
+; r2 = y2
+; =============================================================
+vertical_line:
+    .block
+
+    ; r10 = current row
+    lda r1L
+    sta r10L
+    lda r1H
+    sta r10H
+
+    ; r11 = ending row
+    lda r2L
+    sta r11L
+    lda r2H
+    sta r11H
+
+loop:
+
+    lda r10L
+    sta r1L
+    lda r10H
+    sta r1H
+
+    jsr set_pixel
+
+    clc
+    lda r10L
+    adc #$01
+    sta r10L
+    lda r10H
+    adc #$00
+    sta r10H
+
+    ; Check if we've reached end
+    lda r10H
+    cmp r11H
+    bne loop
+    lda r10L
+    cmp r11L
+    bne loop
+
+    rts
+    .bend
+
+; =============================================================
+; horizontal_line
+; r0 = x1
+; r1 = y1
+; r2 = x2
+; =============================================================
+horizontal_line:
+    .block
+
+    ; r10 = current col (x)
+    lda r0L
+    sta r10L
+    lda r0H
+    sta r10H
+
+    ; r11 = ending col (x)
+    lda r2L
+    sta r11L
+    lda r2H
+    sta r11H
+
+loop:
+
+    ; get next x value
+    lda r10L
+    sta r0L
+    lda r10H
+    sta r0H
+
+    jsr set_pixel
+
+    clc
+    lda r10L
+    adc #$01
+    sta r10L
+    lda r10H
+    adc #$00
+    sta r10H
+
+    ; Check if we've reached end
+    lda r10H
+    cmp r11H
+    bne loop
+    lda r10L
+    cmp r11L
+    bne loop
+
+    rts
+    .bend
+
+; =============================================================
+; rectangle
+; r0 = x1
+; r1 = y1
+; r2 = x2
+; r3 = y2
+; =============================================================
+rectangle:
+    .block
+    lda r0L
+    sta tmp_r0
+    lda r0H
+    sta tmp_r0 + 1
+
+    lda r1L
+    sta tmp_r1
+    lda r1H
+    sta tmp_r1 + 1
+    
+    lda r2L
+    sta tmp_r2
+    lda r2H
+    sta tmp_r2 + 1
+
+    lda r3L
+    sta tmp_r3 
+    lda r3H
+    sta tmp_r3 + 1
+
+    ; get data for first horizonal line
+    lda tmp_r0
+    sta r0L 
+    lda tmp_r0 + 1
+    sta r0H
+
+    lda tmp_r1
+    sta r1L 
+    lda tmp_r1 + 1
+    sta r1H
+
+    lda tmp_r2
+    sta r2L 
+    lda tmp_r2 + 1
+    sta r2H
+
+    jsr horizontal_line
+
+    ; get data for second horizonal line
+    lda tmp_r0
+    sta r0L 
+    lda tmp_r0 + 1
+    sta r0H
+
+    lda tmp_r3
+    sta r1L 
+    lda tmp_r3 + 1
+    sta r1H
+
+    lda tmp_r2
+    sta r2L 
+    lda tmp_r2 + 1
+    sta r2H
+
+    jsr horizontal_line
+    rts
+
+tmp_r0:
+    .byte $00, $00
+tmp_r1:
+    .byte $00, $00
+tmp_r2:
+    .byte $00, $00
+tmp_r3:
+    .byte $00, $00
+
+
+    .bend
 
 ; =============================================================
 ;  div_16bit_by_8
