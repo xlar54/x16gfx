@@ -347,6 +347,43 @@ rectangle:
     sta r2H
 
     jsr horizontal_line
+
+    ; get data for first vertical line
+    lda tmp_r0
+    sta r0L 
+    lda tmp_r0 + 1
+    sta r0H
+
+    lda tmp_r1
+    sta r1L 
+    lda tmp_r1 + 1
+    sta r1H
+
+    lda tmp_r3
+    sta r2L 
+    lda tmp_r3 + 1
+    sta r2H
+
+    jsr vertical_line
+
+    ; get data for second vertical line
+    lda tmp_r2
+    sta r0L 
+    lda tmp_r2 + 1
+    sta r0H
+
+    lda tmp_r1
+    sta r1L 
+    lda tmp_r1 + 1
+    sta r1H
+
+    lda tmp_r3
+    sta r2L 
+    lda tmp_r3 + 1
+    sta r2H
+
+    jsr vertical_line
+
     rts
 
 tmp_r0:

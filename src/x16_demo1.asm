@@ -1,6 +1,7 @@
 
 .include "x16_regs.asm"
 .include "x16_vera.asm"
+.include "x16_macros.asm"
 
 ;---------------------------------------------------------------------
 ; BASIC Loader
@@ -18,83 +19,66 @@
     jsr screen_hires
     jsr screen_clear
 
+    ; draw a line from 320,0 to 320,480 using "vertical_line" and the LoadW macro
 
-    ; draw a line from 320,0 to 320,480 using "vertical_line"
-
-    ; x1 = 320
-    lda #$40
-    sta r0L
-    lda #$01
-    sta r0H
-
-    ; y1 = 0
-    lda #$00
-    sta r1L
-    lda #$00
-    sta r1H
-
-    ; y2 = 480
-    lda #$e0
-    sta r2L
-    lda #$01
-    sta r2H
-
+    LoadW $140, r0      ; x1 = 320
+    LoadW $0, r1        ; y1 = 0
+    LoadW $1e0, r2      ; y2 = 480
     jsr vertical_line
 
     ; draw a line from 0,240 to 640, 240 using "horizontal_line"
 
-    ; x1 = 0
-    lda #$00
-    sta r0L
-    lda #$00
-    sta r0H
-
-    ; y1 = 240
-    lda #$f0
-    sta r1L
-    lda #$00
-    sta r1H
-
-    ; x2 = 640
-    lda #$80
-    sta r2L
-    lda #$02
-    sta r2H
-    
+    LoadW $0, r0        ; x1 = 0
+    LoadW $f0, r1       ; y1 = 240
+    LoadW $280, r2      ; y2 = 640
     jsr horizontal_line
 
+    jsr wait_key
 
-    ; draw a rectangle
+    jsr screen_clear
 
-    ; x1 = 10
-    lda #$0a
-    sta r0L
-    lda #$00
-    sta r0H
+    ; draw the geos desktop
+    LoadRect 0,0,430,20   ; x1,y1,x2,y2
+    jsr rectangle
 
-    ; y1 = 10
-    lda #$0a
-    sta r1L
-    lda #$00
-    sta r1H
+    LoadRect 480,0,639,20   ; x1,y1,x2,y2
+    jsr rectangle
 
-    ; x2 = 20
-    lda #$14
-    sta r2L
-    lda #$00
-    sta r2H
+    LoadRect 20,40,500,350   ; x1,y1,x2,y2
+    jsr rectangle
 
-    ; y2 = 20
-    lda #$19
-    sta r3L
-    lda #$00
-    sta r3H
-    
+    LoadRect 20,40,500,80   ; x1,y1,x2,y2
+    jsr rectangle
+
+    LoadHLine 20,44,500
     jsr horizontal_line
+
+    LoadHLine 20,48,500
+    jsr horizontal_line
+
+    LoadHLine 20,52,500
+    jsr horizontal_line
+
+    LoadHLine 20,56,500
+    jsr horizontal_line
+
+    LoadHLine 20,60,500
+    jsr horizontal_line
+
+    LoadHLine 20,346,500
+    jsr horizontal_line
+
+    jsr wait_key
+
+    jmp exit
 
 wait_key:
-    jsr CHRIN
+    jsr GETIN
     beq wait_key
+    rts
+    
+
+exit:
     jsr CINT
     rts
 
