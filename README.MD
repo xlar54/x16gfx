@@ -1,3 +1,0 @@
-Hi Res (640x480) Bitmap Assembly Demos For the CX16
-
-Maybe it will become something more. 
