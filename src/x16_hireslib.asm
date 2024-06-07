@@ -64,10 +64,13 @@ screen_hires:
 
 ; =============================================================
 ; screen_clear
+; Input : .A ($00 = black background, $ff = White background)
 ; clears screen VRAM
 ; =============================================================
 screen_clear:   
     .block
+    pha
+
     ; set up DCSEL=2
     lda #(2 << 1)
     sta VERA_CTRL
@@ -79,10 +82,13 @@ screen_clear:
     ; set FX cache to all zeroes
     lda #(6 << 1)
     sta VERA_CTRL
-    stz $9f29
-    stz $9f2a
-    stz $9f2b
-    stz $9f2c    
+    
+    pla
+    lda #$00; $ff=white, $00=black
+    sta $9f29
+    sta $9f2a
+    sta $9f2b
+    sta $9f2c    
 
     stz VERA_CTRL
     ; set address and increment for bitmap area
@@ -397,6 +403,16 @@ tmp_r3:
 
 
     .bend
+
+; =============================================================
+; draw_image
+; r0 = x1
+; r1 = y1
+; r2 = width
+; r3 = height
+; =============================================================
+draw_image:
+
 
 ; =============================================================
 ;  div_16bit_by_8

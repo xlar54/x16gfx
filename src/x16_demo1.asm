@@ -17,6 +17,8 @@
 
     ; setup hires mode and clear the screen
     jsr screen_hires
+
+    lda #$00
     jsr screen_clear
 
     ; draw a line from 320,0 to 320,480 using "vertical_line" and the LoadW macro
