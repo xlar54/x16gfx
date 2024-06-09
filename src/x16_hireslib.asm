@@ -1,4 +1,7 @@
 
+COLOR:
+.byte $00
+
 ; =============================================================
 ; screen_hires
 ; set up the screen mode
@@ -64,12 +67,10 @@ screen_hires:
 
 ; =============================================================
 ; screen_clear
-; Input : .A ($00 = black background, $ff = White background)
 ; clears screen VRAM
 ; =============================================================
 screen_clear:   
     .block
-    pha
 
     ; set up DCSEL=2
     lda #(2 << 1)
@@ -82,13 +83,16 @@ screen_clear:
     ; set FX cache to all zeroes
     lda #(6 << 1)
     sta VERA_CTRL
-    
-    pla
-    lda #$00; $ff=white, $00=black
+
+    lda COLOR
+    ; $00=black, $01=white
+    beq ahead
+    lda #$ff
+ahead:
     sta $9f29
     sta $9f2a
     sta $9f2b
-    sta $9f2c    
+    sta $9f2c
 
     stz VERA_CTRL
     ; set address and increment for bitmap area
@@ -129,7 +133,6 @@ blank_loop:
 ; =============================================================
 set_pixel:
     .block
-
     ; Calculate Row Address
     lda r1L             ; Load y low byte
     sta r3L
@@ -167,18 +170,32 @@ set_pixel:
     sta VERA_ADDRx_M
     lda rowAddrH
     sta VERA_ADDRx_H
-    
+
+    lda COLOR
+    beq ahead
+
+    ; if COLOR = 1, white is line color
     ; Set the bit in the byte at VERA_DATA0
     lda VERA_DATA0      ; Load the byte at memory address
-    ora bitMasks,X      ; OR with the bit mask
+    ora bitMasks1,X      ; OR with the bit mask
+    ;lda 0
     sta VERA_DATA0      ; Store back the modified byte
+    rts
 
+ahead:
+    ; if COLOR = 0, black is line color
+    lda VERA_DATA0      ; Load the byte at memory address
+    and bitMasks2,X      ; OR with the bit mask
+    sta VERA_DATA0      ; Store back the modified byte
     rts
 
 ; Bit masks for setting pixels
-bitMasks:
+bitMasks1:
     .byte %10000000, %01000000, %00100000, %00010000
     .byte %00001000, %00000100, %00000010, %00000001
+bitMasks2:
+    .byte %01111111, %10111111, %11011111, %11101111
+    .byte %11110111, %11111011, %11111101, %11111110
 
 rowAddrL: 
     .byte 0
@@ -189,6 +206,73 @@ rowAddrH:
 colAddrL: 
     .byte 0
     .bend
+
+; =============================================================
+; set_pixel_pattern
+; r0 = x
+; r1 = y
+; .A = byte pattern
+; =============================================================
+set_pixel_pattern:
+    .block
+    pha
+
+    ; Calculate Row Address
+    lda r1L             ; Load y low byte
+    sta r3L
+    lda r1H
+    sta r3H
+    lda #$50            ; x 80
+    sta r4L
+    lda #$00
+    sta r4H
+    jsr mult_16x16      ; Multiply by 80
+
+    lda r4L
+    sta rowAddrL        ; Store row address low byte
+    lda r4H
+    sta rowAddrM
+    lda r3L             ; Load high byte result
+    sta rowAddrH        ; Store row address high byte
+
+    jsr div_16bit_by_8
+    lda r5L
+    sta colAddrL
+
+    ; Combine row address and column address
+    clc
+    lda rowAddrL
+    adc colAddrL
+    sta VERA_ADDRx_L
+    lda rowAddrM
+    adc #$00
+    sta VERA_ADDRx_M
+    lda rowAddrH
+    sta VERA_ADDRx_H
+
+    lda COLOR
+    beq invert
+
+    pla
+    sta VERA_DATA0      ; send bit pattern
+    rts
+
+invert:
+    pla
+    eor #$ff
+    sta VERA_DATA0      ; send bit pattern
+    rts
+
+rowAddrL: 
+    .byte 0
+rowAddrM: 
+    .byte 0
+rowAddrH: 
+    .byte 0
+colAddrL: 
+    .byte 0
+    .bend
+
 
 ; =============================================================
 ; vertical_line
@@ -247,7 +331,6 @@ loop:
 ; =============================================================
 horizontal_line:
     .block
-
     ; r10 = current col (x)
     lda r0L
     sta r10L
@@ -404,14 +487,171 @@ tmp_r3:
 
     .bend
 
+
 ; =============================================================
-; draw_image
-; r0 = x1
-; r1 = y1
-; r2 = width
-; r3 = height
+; draw_icon
+; r0 = pointer to icon table icon
 ; =============================================================
-draw_image:
+draw_icon:
+    .block
+    ; set up indirect indexed addressing to the data from the structure
+    clc
+    lda r0L
+    sta r15L
+    lda r0H
+    sta r15H
+
+    ; capture the width
+    ldy #$04
+    lda (r15L), y
+    sta org_width
+
+    ; set up our starting X/Y locations
+    ldy #$00
+    lda (r15L), y
+    sta curY
+
+    ldy #$01
+    lda (r15L), y
+    sta curY + 1
+
+    ldy #$02
+    lda (r15L), y
+    sta curX
+    sta orig_X
+
+    ldy #$03
+    lda (r15L), y
+    sta curX + 1
+    sta orig_X + 1
+
+    lda #$09                ; prepare the index to the image data
+    sta byteIdx
+
+    ; save width and height as decrement counters
+    ldy #$04
+    lda (r15L), y
+    sta tmp_width_ctr
+
+    ldy #$05
+    lda (r15L), y
+    sta tmp_height_ctr
+
+    ; r0 = curX
+    lda curX
+    sta r0L
+    lda curX + 1
+    sta r0H
+
+    ; r1 = curY
+    lda curY
+    sta r1L
+    lda curY + 1
+    sta r1H
+
+loop:
+    lda curX                ; r0 = curX
+    sta r0L
+    lda curX+1
+    sta r0H
+
+    lda curY                ; r1 = curY
+    sta r1L
+    lda curY+1
+    sta r1H
+
+    ldy byteIdx             ; A = pixel pattern
+    lda (r15L), y
+
+    jsr set_pixel_pattern   ; write pixel pattern to screen
+
+    inc byteIdx             ; byteIdx++
+
+    dec tmp_width_ctr       ; tmp_width_ctr--
+    
+    clc                     ; curX = curX + 8
+    lda curX
+    adc #$08
+    sta curX
+    lda curX + 1
+    adc #$00
+    sta curX + 1
+
+    lda tmp_width_ctr       ; IF tmp_width_ctr > 0, repeat inner loop
+    bne loop
+
+    lda org_width           ; ELSE reset tmp_width_ctr
+    sta tmp_width_ctr
+
+    lda orig_X              ; reset curX for next line
+    sta curX
+    lda orig_X + 1
+    sta curX + 1
+
+    lda curY                ; curY = curY + 1
+    adc #$01
+    sta curY
+    lda curY + 1
+    adc #$00
+    sta curY + 1
+
+    dec tmp_height_ctr      ; tmp_height_ctr--
+    lda tmp_height_ctr      ; if tmp_height_ctr > 0, repeat outer loop
+    bne loop
+
+    rts
+
+orig_X:
+.byte $00, $00
+curX:
+.byte $00, $00
+curY:
+.byte $00, $00
+org_width:
+.byte $00
+tmp_width_ctr:
+.byte $00
+tmp_height_ctr:
+.byte $00
+byteIdx:
+.byte $00
+    .bend
+
+
+; =============================================================
+; bit_test
+; A = bit number (0-7)
+; X = byte to test
+; Result: A = 1 if the specified bit in X is set, 
+;         A = 0 if the specified bit in X is not set
+; =============================================================
+
+bit_test:
+    .block
+    tay             ; Transfer the bit number from A to Y for shifting
+    lda #$01        ; Start with bit mask 00000001
+loop:
+    sta r10L
+    dey             ; Decrement Y (bit counter)
+    bpl apply_mask  ; If Y is zero, we have our bit mask    
+    asl             ; Shift the bit mask left
+    jmp loop
+
+apply_mask:
+    txa 
+    and r10L
+    beq bit_clear   ; If result is zero, the bit is not set
+    lda #$01        ; Set A to 1 (bit is set)
+    jmp done        ; Jump to DONE
+
+bit_clear:
+    lda #$00        ; Set A to 0 (bit not set)
+
+done:
+    rts             ; Return from subroutine
+
+    .bend
+
 
 
 ; =============================================================
@@ -499,3 +739,4 @@ lp2:
 
     rts
     .bend
+

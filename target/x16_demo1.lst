@@ -1,0 +1,1011 @@
+
+; 64tass Turbo Assembler Macro V1.53.1515 listing file
+; 64tass --m65c02 -m -a -l ./target/x16_demo1.lbl -L ./target/x16_demo1.lst -o ./target/demo1 ./src/x16_demo1.asm
+; Sun Jun 09 06:46:33 2024
+
+;Offset	;Hex		;Source
+
+;******  Processing input file: ./src/x16_demo1.asm
+
+
+;******  Processing file: ./src/x16_regs.asm
+
+=$02			r0	= $02
+=$02			r0L	= $02
+=$03			r0H	= $03
+=$04			r1	= $04
+=$04			r1L	= $04
+=$05			r1H	= $05
+=$06			r2	= $06
+=$06			r2L	= $06
+=$07			r2H	= $07
+=$08			r3	= $08
+=$08			r3L	= $08
+=$09			r3H	= $09
+=$0a			r4	= $0a
+=$0a			r4L	= $0a
+=$0b			r4H	= $0b
+=$0c			r5	= $0c
+=$0c			r5L	= $0c
+=$0d			r5H	= $0d
+=$0e			r6	= $0e
+=$0e			r6L	= $0e
+=$0f			r6H	= $0f
+=$10			r7	= $10
+=$10			r7L	= $10
+=$11			r7H	= $11
+=$12			r8	= $12
+=$12			r8L	= $12
+=$13			r8H	= $13
+=$14			r9	= $14
+=$14			r9L	= $14
+=$15			r9H	= $15
+=$16			r10	= $16
+=$16			r10L	= $16
+=$17			r10H	= $17
+=$18			r11	= $18
+=$18			r11L	= $18
+=$19			r11H	= $19
+=$1a			r12	= $1a
+=$1a			r12L	= $1a
+=$1b			r12H	= $1b
+=$1c			r13	= $1c
+=$1c			r13L	= $1c
+=$1d			r13H	= $1d
+=$1e			r14	= $1e
+=$1e			r14L	= $1e
+=$1f			r14H	= $1f
+=$20			r15	= $20
+=$20			r15L	= $20
+=$21			r15H	= $21
+
+;******  Return to file: ./src/x16_demo1.asm
+
+
+;******  Processing file: ./src/x16_vera.asm
+
+=$9f20			VERA_BASE           = $9f20
+=$9f20			VERA_ADDRx_L        = $9f20
+=$9f21			VERA_ADDRx_M        = $9f21
+=$9f22			VERA_ADDRx_H        = $9f22
+=$9f23			VERA_DATA0          = $9f23
+=$9f24			VERA_DATA1          = $9f24
+=$9f25			VERA_CTRL           = $9f25
+=$9f26			VERA_IEN            = $9f26
+=$9f27			VERA_ISR            = $9f27
+=$9f28			VERA_IRQLINE_L      = $9f28 ; write only
+=$9f28			VERA_SCANLINE_L     = $9f28 ; read only
+=$9f29			VERA_DC_VIDEO       = $9f29     ; Active Display Control
+=$9f2a			VERA_DC_HSCALE      = $9f2a     ; Active Display H-Scale
+=$9f2b			VERA_DC_VSCALE      = $9f2b     ; Active Display V-Scale
+=$9f2c			VERA_DC_BORDER      = $9f2c     ; Border Color
+=$9f29			VERA_DC_HSTART      = $9f29     ; Active Display H-Start
+=$9f2a			VERA_DC_HSTOP       = $9f2a     ; Active Display H-Stop
+=$9f2b			VERA_DC_VSTART      = $9f2b     ; Active Display V-Start
+=$9f2c			VERA_DC_VSTOP       = $9f2c     ; Active Display V-Stop
+=$9f29			VERA_FX_CTRL        = $9f29     ; ADDR1 Update Mode / VRAM Data Port Write Mode
+=$9f2a			VERA_FX_TILEBASE    = $9f2a     ; Affine Transformation Tile Base (write only)
+=$9f2b			VERA_FX_MAPBASE     = $9f2b     ; Affine Transformation Map Base (write only)
+=$9f2c			VERA_FX_MULT        = $9f2c     ; Write Cache Index / Multiply-accumulate Mode (write only)
+=$9f29			VERA_FX_X_INCR_L    = $9f29     ; X Position Increment (lower 8 bits) (write only)
+=$9f2a			VERA_FX_X_INCR_H    = $9f2a     ; X Position Increment (upper 8 bits) (write only)
+=$9f2b			VERA_FX_Y_INCR_L    = $9f2b     ; Y Position Increment (lower 8 bits) (write only)
+=$9f2c			VERA_FX_Y_INCR_H    = $9f2c     ; Y Position Increment (upper 8 bits) (write only)
+=$9f29			VERA_FX_X_POS_L     = $9f29     ; Pixel X Position (lower 8 bits) (write only)
+=$9f2a			VERA_FX_X_POS_H     = $9f2a     ; Pixel X Position (upper 3 bits) (write only)
+=$9f2b			VERA_FX_Y_POS_L     = $9f2b     ; Pixel Y Position (lower 8 bits) (write only)
+=$9f2c			VERA_FX_Y_POS_H     = $9f2c     ; Pixel Y Position (upper 3 bits) (write only)
+=$9f29			VERA_FX_X_POS_S     = $9f29     ; Pixel X Fractional Position (upper 8 bits) (write only)
+=$9f2a			VERA_FX_Y_POS_S     = $9f2a     ; Pixel Y Fractional Position (upper 8 bits) (write only)
+=$9f2b			VERA_FX_POLY_FILL_L = $9f2b     ; Fill Length (lower 3 bits) (read only)
+=$9f2c			VERA_FX_POLY_FILL_H = $9f2c     ; Fill Length (upper 7 bits) (read only)
+=$9f29			VERA_FX_CACHE_L     = $9f29     ; 32-bit Write Cache Data  (write only)
+=$9f29			VERA_FX_ACCUM_RESET = $9f29     ; (read only)
+=$9f2a			VERA_FX_CACHE_M     = $9f2a     ; (write only)
+=$9f2a			VERA_FX_ACCUM       = $9f2a     ; (read only)
+=$9f2b			VERAFX_CACHE_H      = $9f2b     ; (write only)
+=$9f2c			VERA_FX_CACHE_U     = $9f2c     ; (write only)
+=$9f29			VERA_DC_VER0        = $9f29      ; Version Number (read only)
+=$9f2a			VERA_DC_VER1        = $9f2a
+=$9f2b			VERA_DC_VER2        = $9f2b
+=$9f2c			VERA_DC_VER3        = $9f2c
+=$9f2d			VERA_L0_CONFIG      = $9f2d
+=$9f2e			VERA_L0_MAPBASE     = $9f2e
+=$9f2f			VERA_L0_TILEBASE    = $9f2f
+=$9f30			VERA_L0_HSCROLL_L   = $9f30
+=$9f31			VERA_L0_HSCROLL_H   = $9f31
+=$9f32			VERA_L0_VSCROLL_L   = $9f32
+=$9f33			VERA_L0_VSCROLL_H   = $9f33
+=$9f34			VERA_L1_CONFIG      = $9f34
+=$9f35			VERA_L1_MAPBASE     = $9f35
+=$9f36			VERA_L1_TILEBASE    = $9f36
+=$9f37			VERA_L1_HSCROLL_L   = $9f37
+=$9f38			VERA_L1_HSCROLL_H   = $9f38
+=$9f39			VERA_L1_VSCROLL_L   = $9f39
+=$9f3a			VERA_L1_VSCROLL_H   = $9f3a
+=$9f3b			VERA_AUDIO_CTRL     = $9f3b
+=$9f3c			VERA_AUDIO_RATE     = $9f3c
+=$9f3d			VERA_AUDIO_DATA     = $9f3d
+=$9f3e			VERA_SPI_DATA       = $9f3e
+=$9f3f			VERA_SPI_CTRL       = $9f3f
+=$ff81			CINT        = $ff81
+=$ffb7			READST      = $ffb7
+=$ffba			SETLFS      = $ffba
+=$ffbd			SETNAM      = $ffbd
+=$ffc0			OPEN        = $ffc0
+=$ffc3			CLOSE       = $ffc3
+=$ffc6			CHKIN       = $ffc6
+=$ffc9			CHKOUT      = $ffc9
+=$ffcf			CHRIN       = $FFCF
+=$ffd2			CHROUT      = $ffd2
+=$ffd5			LOAD        = $ffd5
+=$ffd8			SAVE        = $ffd8
+=$ffe7			CLALL       = $ffe7
+=$ff90			SETMSG      = $ff90
+=$ffa5			ACPTR       = $ffa5
+=$ffa8			CIOUT       = $ffa8
+=$ffab			UNTALK      = $ffab
+=$ffae			UNLSN       = $ffae
+=$ffb1			LISTEN      = $ffb1
+=$ffb4			TALK        = $ffb4
+=$ff93			SECOND      = $ff93
+=$ff96			TALKSA      = $ff96
+=$ffcc			CLRCHN      = $ffcc
+=$ffe4			GETIN       = $ffe4
+=$ff5f			SCREEN_MODE = $ff5f
+=$0287			STATUS      = $0287
+
+;******  Return to file: ./src/x16_demo1.asm
+
+
+;******  Processing file: ./src/x16_macros.asm
+
+
+;******  Return to file: ./src/x16_demo1.asm
+
+>0801	0c 08		.byte $0C, $08  ; pointer to next line
+>0803	0a 00		.byte $0A, $00  ; line number (10)
+>0805	9e		.byte $9E       ; SYS token
+>0806	20 32 30 36	.text " 2062"   ; SYS address in ASCII
+>080a	32
+>080b	00 00 00	.byte 0, 0, 0   ; end-of-program
+.080e	20 8c 0d	    jsr screen_hires
+.0811	a9 00		    lda #0
+.0813	8d 8b 0d	    sta COLOR
+.0816	20 a1 0d	    jsr screen_clear
+.0819	a9 01		    lda #1
+.081b	8d 8b 0d	    sta COLOR
+.081e	a9 40		    lda #<($140)
+.0820	85 02		    sta r0
+.0822	a9 01		    lda #>$140
+.0824	85 03		    sta r0 + 1
+.0826	a9 00		    lda #<($0)
+.0828	85 04		    sta r1
+.082a	a9 00		    lda #>$0
+.082c	85 05		    sta r1 + 1
+.082e	a9 e0		    lda #<($1e0)
+.0830	85 06		    sta r2
+.0832	a9 01		    lda #>$1e0
+.0834	85 07		    sta r2 + 1
+.0836	20 cb 0e	    jsr vertical_line
+.0839	a9 00		    lda #<($0)
+.083b	85 02		    sta r0
+.083d	a9 00		    lda #>$0
+.083f	85 03		    sta r0 + 1
+.0841	a9 f0		    lda #<($f0)
+.0843	85 04		    sta r1
+.0845	a9 00		    lda #>$f0
+.0847	85 05		    sta r1 + 1
+.0849	a9 80		    lda #<($280)
+.084b	85 06		    sta r2
+.084d	a9 02		    lda #>$280
+.084f	85 07		    sta r2 + 1
+.0851	20 00 0f	    jsr horizontal_line
+.0854	20 98 09	    jsr wait_key
+.0857	a9 00		    lda #0
+.0859	8d 8b 0d	    sta COLOR
+.085c	20 a1 0d	    jsr screen_clear
+.085f	a9 01		    lda #1
+.0861	8d 8b 0d	    sta COLOR
+.0864	a9 00		    lda #<0
+.0866	85 02		    sta r0L
+.0868	a9 00		    lda #>0
+.086a	85 03		    sta r0H
+.086c	a9 00		    lda #<0
+.086e	85 04		    sta r1L
+.0870	a9 00		    lda #>0
+.0872	85 05		    sta r1H
+.0874	a9 ae		    lda #<430
+.0876	85 06		    sta r2L
+.0878	a9 01		    lda #>430
+.087a	85 07		    sta r2H
+.087c	a9 14		    lda #<20
+.087e	85 08		    sta r3L
+.0880	a9 00		    lda #>20
+.0882	85 09		    sta r3H
+.0884	20 35 0f	    jsr rectangle
+.0887	a9 e0		    lda #<480
+.0889	85 02		    sta r0L
+.088b	a9 01		    lda #>480
+.088d	85 03		    sta r0H
+.088f	a9 00		    lda #<0
+.0891	85 04		    sta r1L
+.0893	a9 00		    lda #>0
+.0895	85 05		    sta r1H
+.0897	a9 7f		    lda #<639
+.0899	85 06		    sta r2L
+.089b	a9 02		    lda #>639
+.089d	85 07		    sta r2H
+.089f	a9 14		    lda #<20
+.08a1	85 08		    sta r3L
+.08a3	a9 00		    lda #>20
+.08a5	85 09		    sta r3H
+.08a7	20 35 0f	    jsr rectangle
+.08aa	a9 14		    lda #<20
+.08ac	85 02		    sta r0L
+.08ae	a9 00		    lda #>20
+.08b0	85 03		    sta r0H
+.08b2	a9 28		    lda #<40
+.08b4	85 04		    sta r1L
+.08b6	a9 00		    lda #>40
+.08b8	85 05		    sta r1H
+.08ba	a9 f4		    lda #<500
+.08bc	85 06		    sta r2L
+.08be	a9 01		    lda #>500
+.08c0	85 07		    sta r2H
+.08c2	a9 5e		    lda #<350
+.08c4	85 08		    sta r3L
+.08c6	a9 01		    lda #>350
+.08c8	85 09		    sta r3H
+.08ca	20 35 0f	    jsr rectangle
+.08cd	a9 14		    lda #<20
+.08cf	85 02		    sta r0L
+.08d1	a9 00		    lda #>20
+.08d3	85 03		    sta r0H
+.08d5	a9 28		    lda #<40
+.08d7	85 04		    sta r1L
+.08d9	a9 00		    lda #>40
+.08db	85 05		    sta r1H
+.08dd	a9 f4		    lda #<500
+.08df	85 06		    sta r2L
+.08e1	a9 01		    lda #>500
+.08e3	85 07		    sta r2H
+.08e5	a9 50		    lda #<80
+.08e7	85 08		    sta r3L
+.08e9	a9 00		    lda #>80
+.08eb	85 09		    sta r3H
+.08ed	20 35 0f	    jsr rectangle
+.08f0	a9 14		    lda #<20
+.08f2	85 02		    sta r0L
+.08f4	a9 00		    lda #>20
+.08f6	85 03		    sta r0H
+.08f8	a9 2c		    lda #<44
+.08fa	85 04		    sta r1L
+.08fc	a9 00		    lda #>44
+.08fe	85 05		    sta r1H
+.0900	a9 f4		    lda #<500
+.0902	85 06		    sta r2L
+.0904	a9 01		    lda #>500
+.0906	85 07		    sta r2H
+.0908	20 00 0f	    jsr horizontal_line
+.090b	a9 14		    lda #<20
+.090d	85 02		    sta r0L
+.090f	a9 00		    lda #>20
+.0911	85 03		    sta r0H
+.0913	a9 30		    lda #<48
+.0915	85 04		    sta r1L
+.0917	a9 00		    lda #>48
+.0919	85 05		    sta r1H
+.091b	a9 f4		    lda #<500
+.091d	85 06		    sta r2L
+.091f	a9 01		    lda #>500
+.0921	85 07		    sta r2H
+.0923	20 00 0f	    jsr horizontal_line
+.0926	a9 14		    lda #<20
+.0928	85 02		    sta r0L
+.092a	a9 00		    lda #>20
+.092c	85 03		    sta r0H
+.092e	a9 34		    lda #<52
+.0930	85 04		    sta r1L
+.0932	a9 00		    lda #>52
+.0934	85 05		    sta r1H
+.0936	a9 f4		    lda #<500
+.0938	85 06		    sta r2L
+.093a	a9 01		    lda #>500
+.093c	85 07		    sta r2H
+.093e	20 00 0f	    jsr horizontal_line
+.0941	a9 14		    lda #<20
+.0943	85 02		    sta r0L
+.0945	a9 00		    lda #>20
+.0947	85 03		    sta r0H
+.0949	a9 38		    lda #<56
+.094b	85 04		    sta r1L
+.094d	a9 00		    lda #>56
+.094f	85 05		    sta r1H
+.0951	a9 f4		    lda #<500
+.0953	85 06		    sta r2L
+.0955	a9 01		    lda #>500
+.0957	85 07		    sta r2H
+.0959	20 00 0f	    jsr horizontal_line
+.095c	a9 14		    lda #<20
+.095e	85 02		    sta r0L
+.0960	a9 00		    lda #>20
+.0962	85 03		    sta r0H
+.0964	a9 3c		    lda #<60
+.0966	85 04		    sta r1L
+.0968	a9 00		    lda #>60
+.096a	85 05		    sta r1H
+.096c	a9 f4		    lda #<500
+.096e	85 06		    sta r2L
+.0970	a9 01		    lda #>500
+.0972	85 07		    sta r2H
+.0974	20 00 0f	    jsr horizontal_line
+.0977	a9 14		    lda #<20
+.0979	85 02		    sta r0L
+.097b	a9 00		    lda #>20
+.097d	85 03		    sta r0H
+.097f	a9 5a		    lda #<346
+.0981	85 04		    sta r1L
+.0983	a9 01		    lda #>346
+.0985	85 05		    sta r1H
+.0987	a9 f4		    lda #<500
+.0989	85 06		    sta r2L
+.098b	a9 01		    lda #>500
+.098d	85 07		    sta r2H
+.098f	20 00 0f	    jsr horizontal_line
+.0992	20 98 09	    jsr wait_key
+.0995	4c 9e 09	    jmp exit
+.0998			wait_key:
+.0998	20 e4 ff	    jsr GETIN
+.099b	f0 fb		    beq wait_key
+.099d	60		    rts
+.099e			exit:
+.099e	20 81 ff	    jsr CINT
+.09a1	60		    rts
+
+;******  Processing file: ./src/x16_font.asm
+
+.09a2			vwfont:
+>09a2	04 07 00 00	.byte $04, $07, $00, $00, $00, $00, $00, $00, $00, $00, $00       ; // space
+>09a6	00 00 00 00 00 00 00
+>09ad	01 07 00 80	.byte $01, $07, $00, $80, $80, $80, $80, $00, $80, $80, $00       ; // !
+>09b1	80 80 80 00 80 80 00
+>09b8	03 02 00 a0	.byte $03, $02, $00, $A0, $A0, $00, $00, $00, $00, $00, $00       ; // "
+>09bc	a0 00 00 00 00 00 00
+>09c3	05 07 00 50	.byte $05, $07, $00, $50, $50, $F8, $50, $F8, $50, $50, $00       ; // #
+>09c7	50 f8 50 f8 50 50 00
+>09ce	05 08 00 78	.byte $05, $08, $00, $78, $A0, $60, $20, $30, $28, $F0, $20       ; // $
+>09d2	a0 60 20 30 28 f0 20
+>09d9	05 07 00 c0	.byte $05, $07, $00, $C0, $C8, $10, $20, $40, $98, $18, $00       ; // %
+>09dd	c8 10 20 40 98 18 00
+>09e4	05 07 00 60	.byte $05, $07, $00, $60, $80, $90, $78, $90, $90, $70, $00       ; // &
+>09e8	80 90 78 90 90 70 00
+>09ef	02 07 00 40	.byte $02, $07, $00, $40, $40, $80, $00, $00, $00, $00, $00       ; // '
+>09f3	40 80 00 00 00 00 00
+>09fa	03 08 01 20	.byte $03, $08, $01, $20, $40, $80, $80, $80, $80, $40, $20       ; // (
+>09fe	40 80 80 80 80 40 20
+>0a05	03 08 01 80	.byte $03, $08, $01, $80, $40, $20, $20, $20, $20, $40, $80       ; // )
+>0a09	40 20 20 20 20 40 80
+>0a10	05 07 00 20	.byte $05, $07, $00, $20, $A8, $70, $F8, $70, $A8, $20, $00       ; // *
+>0a14	a8 70 f8 70 a8 20 00
+>0a1b	05 07 00 00	.byte $05, $07, $00, $00, $20, $20, $F8, $20, $20, $00, $00       ; // +
+>0a1f	20 20 f8 20 20 00 00
+>0a26	02 02 01 40	.byte $02, $02, $01, $40, $80, $00, $00, $00, $00, $00, $00       ; // ,
+>0a2a	80 00 00 00 00 00 00
+>0a31	04 07 00 00	.byte $04, $07, $00, $00, $00, $00, $F0, $00, $00, $00, $00       ; // -
+>0a35	00 00 f0 00 00 00 00
+>0a3c	01 01 00 80	.byte $01, $01, $00, $80, $00, $00, $00, $00, $00, $00, $00       ; // .
+>0a40	00 00 00 00 00 00 00
+>0a47	06 07 00 00	.byte $06, $07, $00, $00, $04, $08, $10, $20, $40, $80, $00       ; // /
+>0a4b	04 08 10 20 40 80 00
+>0a52	04 07 00 60	.byte $04, $07, $00, $60, $90, $B0, $D0, $90, $90, $60, $00       ; // 0
+>0a56	90 b0 d0 90 90 60 00
+>0a5d	02 07 00 40	.byte $02, $07, $00, $40, $C0, $40, $40, $40, $40, $40, $00       ; // 1
+>0a61	c0 40 40 40 40 40 00
+>0a68	03 07 00 c0	.byte $03, $07, $00, $C0, $20, $20, $40, $80, $80, $E0, $00       ; // 2
+>0a6c	20 20 40 80 80 e0 00
+>0a73	03 07 00 c0	.byte $03, $07, $00, $C0, $20, $20, $40, $20, $20, $C0, $00       ; // 3
+>0a77	20 20 40 20 20 c0 00
+>0a7e	04 07 00 10	.byte $04, $07, $00, $10, $30, $50, $90, $F0, $10, $10, $00       ; // 4
+>0a82	30 50 90 f0 10 10 00
+>0a89	03 07 00 e0	.byte $03, $07, $00, $E0, $80, $C0, $20, $20, $20, $C0, $00       ; // 5
+>0a8d	80 c0 20 20 20 c0 00
+>0a94	04 07 00 20	.byte $04, $07, $00, $20, $40, $80, $E0, $90, $90, $60, $00       ; // 6
+>0a98	40 80 e0 90 90 60 00
+>0a9f	04 07 00 f0	.byte $04, $07, $00, $F0, $10, $20, $40, $40, $40, $40, $00       ; // 7
+>0aa3	10 20 40 40 40 40 00
+>0aaa	04 07 00 60	.byte $04, $07, $00, $60, $90, $90, $60, $90, $90, $60, $00       ; // 8
+>0aae	90 90 60 90 90 60 00
+>0ab5	04 07 00 60	.byte $04, $07, $00, $60, $90, $90, $70, $10, $20, $40, $00       ; // 9
+>0ab9	90 90 70 10 20 40 00
+>0ac0	01 04 00 80	.byte $01, $04, $00, $80, $00, $00, $80, $00, $00, $00, $00       ; // :
+>0ac4	00 00 80 00 00 00 00
+>0acb	02 05 01 40	.byte $02, $05, $01, $40, $00, $00, $40, $80, $00, $00, $00       ; // ;
+>0acf	00 00 40 80 00 00 00
+>0ad6	03 06 00 00	.byte $03, $06, $00, $00, $20, $40, $80, $40, $20, $00, $00       ; // <
+>0ada	20 40 80 40 20 00 00
+>0ae1	04 06 00 00	.byte $04, $06, $00, $00, $F0, $00, $F0, $00, $00, $00, $00       ; // =
+>0ae5	f0 00 f0 00 00 00 00
+>0aec	03 06 00 00	.byte $03, $06, $00, $00, $80, $40, $20, $40, $80, $00, $00       ; // >
+>0af0	80 40 20 40 80 00 00
+>0af7	05 07 00 70	.byte $05, $07, $00, $70, $88, $10, $20, $20, $00, $20, $00       ; // ?
+>0afb	88 10 20 20 00 20 00
+>0b02	05 07 00 70	.byte $05, $07, $00, $70, $88, $B8, $A8, $B8, $80, $70, $00       ; // @
+>0b06	88 b8 a8 b8 80 70 00
+>0b0d	04 05 00 70	.byte $04, $05, $00, $70, $90, $90, $90, $50, $00, $00, $00       ; // a
+>0b11	90 90 90 50 00 00 00
+>0b18	04 07 00 80	.byte $04, $07, $00, $80, $80, $E0, $90, $90, $90, $E0, $00       ; // b
+>0b1c	80 e0 90 90 90 e0 00
+>0b23	04 05 00 60	.byte $04, $05, $00, $60, $90, $80, $80, $70, $00, $00, $00       ; // c
+>0b27	90 80 80 70 00 00 00
+>0b2e	04 07 00 10	.byte $04, $07, $00, $10, $10, $70, $90, $90, $90, $70, $00       ; // d
+>0b32	10 70 90 90 90 70 00
+>0b39	04 05 00 60	.byte $04, $05, $00, $60, $90, $F0, $80, $70, $00, $00, $00       ; // e
+>0b3d	90 f0 80 70 00 00 00
+>0b44	02 07 00 40	.byte $02, $07, $00, $40, $80, $C0, $80, $80, $80, $80, $00       ; // f
+>0b48	80 c0 80 80 80 80 00
+>0b4f	04 07 02 70	.byte $04, $07, $02, $70, $90, $90, $90, $70, $10, $20, $00       ; // g
+>0b53	90 90 90 70 10 20 00
+>0b5a	04 07 00 80	.byte $04, $07, $00, $80, $80, $E0, $90, $90, $90, $90, $00       ; // h
+>0b5e	80 e0 90 90 90 90 00
+>0b65	01 07 00 80	.byte $01, $07, $00, $80, $00, $80, $80, $80, $80, $80, $00       ; // i
+>0b69	00 80 80 80 80 80 00
+>0b70	02 07 02 40	.byte $02, $07, $02, $40, $00, $40, $40, $40, $40, $80, $00       ; // j
+>0b74	00 40 40 40 40 80 00
+>0b7b	04 07 00 80	.byte $04, $07, $00, $80, $80, $90, $A0, $C0, $A0, $90, $00       ; // k
+>0b7f	80 90 a0 c0 a0 90 00
+>0b86	01 07 00 80	.byte $01, $07, $00, $80, $80, $80, $80, $80, $80, $80, $00       ; // l
+>0b8a	80 80 80 80 80 80 00
+>0b91	07 05 00 ec	.byte $07, $05, $00, $EC, $92, $92, $92, $92, $00, $00, $00       ; // m
+>0b95	92 92 92 92 00 00 00
+>0b9c	04 05 00 e0	.byte $04, $05, $00, $E0, $90, $90, $90, $90, $00, $00, $00       ; // n
+>0ba0	90 90 90 90 00 00 00
+>0ba7	05 05 00 70	.byte $05, $05, $00, $70, $88, $88, $88, $70, $00, $00, $00       ; // o
+>0bab	88 88 88 70 00 00 00
+>0bb2	04 07 02 e0	.byte $04, $07, $02, $E0, $90, $90, $90, $E0, $80, $80, $00       ; // p
+>0bb6	90 90 90 e0 80 80 00
+>0bbd	04 07 02 70	.byte $04, $07, $02, $70, $90, $90, $90, $70, $10, $10, $00       ; // q
+>0bc1	90 90 90 70 10 10 00
+>0bc8	02 05 00 40	.byte $02, $05, $00, $40, $80, $80, $80, $80, $00, $00, $00       ; // r
+>0bcc	80 80 80 80 00 00 00
+>0bd3	03 05 00 60	.byte $03, $05, $00, $60, $80, $40, $20, $C0, $00, $00, $00       ; // s
+>0bd7	80 40 20 c0 00 00 00
+>0bde	02 07 00 80	.byte $02, $07, $00, $80, $C0, $80, $80, $80, $80, $40, $00       ; // t
+>0be2	c0 80 80 80 80 40 00
+>0be9	04 05 00 90	.byte $04, $05, $00, $90, $90, $90, $90, $70, $00, $00, $00       ; // u
+>0bed	90 90 90 70 00 00 00
+>0bf4	05 05 00 88	.byte $05, $05, $00, $88, $88, $88, $50, $20, $00, $00, $00       ; // v
+>0bf8	88 88 50 20 00 00 00
+>0bff	07 05 00 92	.byte $07, $05, $00, $92, $92, $92, $92, $6C, $00, $00, $00       ; // w
+>0c03	92 92 92 6c 00 00 00
+>0c0a	05 05 00 88	.byte $05, $05, $00, $88, $50, $20, $50, $88, $00, $00, $00       ; // x
+>0c0e	50 20 50 88 00 00 00
+>0c15	04 07 02 90	.byte $04, $07, $02, $90, $90, $90, $90, $70, $10, $20, $00       ; // y
+>0c19	90 90 90 70 10 20 00
+>0c20	04 05 00 f0	.byte $04, $05, $00, $F0, $20, $40, $80, $F0, $00, $00, $00       ; // z
+>0c24	20 40 80 f0 00 00 00
+>0c2b	02 07 00 c0	.byte $02, $07, $00, $C0, $80, $80, $80, $80, $80, $C0, $00       ; // [
+>0c2f	80 80 80 80 80 c0 00
+>0c36	07 07 00 80	.byte $07, $07, $00, $80, $40, $20, $10, $08, $04, $02, $00       ; // slash
+>0c3a	40 20 10 08 04 02 00
+>0c41	02 07 00 c0	.byte $02, $07, $00, $C0, $40, $40, $40, $40, $40, $C0, $00       ; // ]
+>0c45	40 40 40 40 40 c0 00
+>0c4c	05 07 00 20	.byte $05, $07, $00, $20, $50, $88, $00, $00, $00, $00, $00       ; // ^
+>0c50	50 88 00 00 00 00 00
+>0c57	05 01 00 f8	.byte $05, $01, $00, $F8, $00, $00, $00, $00, $00, $00, $00       ; // _
+>0c5b	00 00 00 00 00 00 00
+>0c62	02 07 00 80	.byte $02, $07, $00, $80, $80, $40, $00, $00, $00, $00, $00       ; // `
+>0c66	80 40 00 00 00 00 00
+>0c6d	05 07 00 20	.byte $05, $07, $00, $20, $50, $88, $88, $F8, $88, $88, $00       ; // A
+>0c71	50 88 88 f8 88 88 00
+>0c78	04 07 00 e0	.byte $04, $07, $00, $E0, $90, $90, $E0, $90, $90, $E0, $00       ; // B
+>0c7c	90 90 e0 90 90 e0 00
+>0c83	04 07 00 60	.byte $04, $07, $00, $60, $90, $80, $80, $80, $80, $70, $00       ; // C
+>0c87	90 80 80 80 80 70 00
+>0c8e	04 07 00 e0	.byte $04, $07, $00, $E0, $90, $90, $90, $90, $90, $E0, $00       ; // D
+>0c92	90 90 90 90 90 e0 00
+>0c99	03 07 00 e0	.byte $03, $07, $00, $E0, $80, $80, $E0, $80, $80, $E0, $00       ; // E
+>0c9d	80 80 e0 80 80 e0 00
+>0ca4	03 07 00 e0	.byte $03, $07, $00, $E0, $80, $80, $E0, $80, $80, $80, $00       ; // F
+>0ca8	80 80 e0 80 80 80 00
+>0caf	04 07 00 60	.byte $04, $07, $00, $60, $90, $80, $80, $B0, $90, $70, $00       ; // G
+>0cb3	90 80 80 b0 90 70 00
+>0cba	05 07 00 88	.byte $05, $07, $00, $88, $88, $88, $F8, $88, $88, $88, $00       ; // H
+>0cbe	88 88 f8 88 88 88 00
+>0cc5	01 07 00 80	.byte $01, $07, $00, $80, $80, $80, $80, $80, $80, $80, $00       ; // I
+>0cc9	80 80 80 80 80 80 00
+>0cd0	03 07 00 20	.byte $03, $07, $00, $20, $20, $20, $20, $20, $20, $C0, $00       ; // J
+>0cd4	20 20 20 20 20 c0 00
+>0cdb	05 07 00 88	.byte $05, $07, $00, $88, $90, $A0, $C0, $A0, $90, $88, $00       ; // K
+>0cdf	90 a0 c0 a0 90 88 00
+>0ce6	03 07 00 80	.byte $03, $07, $00, $80, $80, $80, $80, $80, $80, $E0, $00       ; // L
+>0cea	80 80 80 80 80 e0 00
+>0cf1	07 07 00 82	.byte $07, $07, $00, $82, $C6, $AA, $92, $82, $82, $82, $00       ; // M
+>0cf5	c6 aa 92 82 82 82 00
+>0cfc	05 07 00 88	.byte $05, $07, $00, $88, $C8, $A8, $98, $88, $88, $88, $00       ; // N
+>0d00	c8 a8 98 88 88 88 00
+>0d07	05 07 00 70	.byte $05, $07, $00, $70, $88, $88, $88, $88, $88, $70, $00       ; // O
+>0d0b	88 88 88 88 88 70 00
+>0d12	04 07 00 e0	.byte $04, $07, $00, $E0, $90, $90, $90, $E0, $80, $80, $00       ; // P
+>0d16	90 90 90 e0 80 80 00
+>0d1d	05 08 01 70	.byte $05, $08, $01, $70, $88, $88, $88, $88, $98, $78, $04       ; // Q
+>0d21	88 88 88 88 98 78 04
+>0d28	04 07 00 e0	.byte $04, $07, $00, $E0, $90, $90, $90, $E0, $A0, $90, $00       ; // R
+>0d2c	90 90 90 e0 a0 90 00
+>0d33	04 07 00 70	.byte $04, $07, $00, $70, $80, $C0, $20, $10, $10, $E0, $00       ; // S
+>0d37	80 c0 20 10 10 e0 00
+>0d3e	03 07 00 e0	.byte $03, $07, $00, $E0, $40, $40, $40, $40, $40, $40, $00       ; // T
+>0d42	40 40 40 40 40 40 00
+>0d49	04 07 00 90	.byte $04, $07, $00, $90, $90, $90, $90, $90, $90, $70, $00       ; // U
+>0d4d	90 90 90 90 90 70 00
+>0d54	05 07 00 88	.byte $05, $07, $00, $88, $88, $88, $88, $88, $50, $20, $00       ; // V
+>0d58	88 88 88 88 50 20 00
+>0d5f	07 07 00 82	.byte $07, $07, $00, $82, $82, $82, $92, $AA, $C6, $82, $00       ; // W
+>0d63	82 82 92 aa c6 82 00
+>0d6a	05 07 00 88	.byte $05, $07, $00, $88, $88, $50, $20, $50, $88, $88, $00       ; // X
+>0d6e	88 50 20 50 88 88 00
+>0d75	05 07 00 88	.byte $05, $07, $00, $88, $88, $88, $50, $20, $20, $20, $00       ; // Y
+>0d79	88 88 50 20 20 20 00
+>0d80	07 07 00 f8	.byte $07, $07, $00, $F8, $08, $10, $20, $40, $80, $F8, $00       ; // Z
+>0d84	08 10 20 40 80 f8 00
+
+;******  Return to file: ./src/x16_demo1.asm
+
+
+;******  Processing file: ./src/x16_hireslib.asm
+
+.0d8b			COLOR:
+>0d8b	00		.byte $00
+.0d8c			screen_hires:
+.0d8c	a9 00		    lda #%00000000      ; DCSEL = 0, VRAM port 1
+.0d8e	8d 25 9f	    sta VERA_CTRL
+.0d91	a9 21		    lda #%00100001
+.0d93	8d 29 9f	    sta VERA_DC_VIDEO
+.0d96	a9 04		    lda #%00000100
+.0d98	8d 34 9f	    sta VERA_L1_CONFIG
+.0d9b	a9 01		    lda #%00000001
+.0d9d	8d 36 9f	    sta VERA_L1_TILEBASE
+.0da0	60		    rts
+.0da1			screen_clear:
+.0da1	a9 04		    lda #(2 << 1)
+.0da3	8d 25 9f	    sta VERA_CTRL
+.0da6	a9 40		    lda #$40
+.0da8	0c 29 9f	    tsb VERA_FX_CTRL
+.0dab	a9 0c		    lda #(6 << 1)
+.0dad	8d 25 9f	    sta VERA_CTRL
+.0db0	ad 8b 0d	    lda COLOR
+.0db3	f0 02		    beq ahead
+.0db5	a9 ff		    lda #$ff
+.0db7			ahead:
+.0db7	8d 29 9f	    sta $9f29
+.0dba	8d 2a 9f	    sta $9f2a
+.0dbd	8d 2b 9f	    sta $9f2b
+.0dc0	8d 2c 9f	    sta $9f2c
+.0dc3	9c 25 9f	    stz VERA_CTRL
+.0dc6	9c 20 9f	    stz VERA_ADDRx_L
+.0dc9	9c 21 9f	    stz VERA_ADDRx_M
+.0dcc	a9 30		    lda #$30  ; increment +4
+.0dce	8d 22 9f	    sta VERA_ADDRx_H
+.0dd1	a0 f0		    ldy #240 ; number of rows
+.0dd3			blank_outer:
+.0dd3	a2 0a		    ldx #10 ; 10 iterations of 32 = one line of 320 at 8bpp
+.0dd5			blank_loop:
+.0dd5	9c 23 9f	    stz VERA_DATA0 ; $9f23 each `stz` writes four zeroes to VRAM (cache contents) for a total of 32 pixels when repeated 8x
+.0dd8	9c 23 9f	    stz VERA_DATA0 ; $9f23 each `stz` writes four zeroes to VRAM (cache contents) for a total of 32 pixels when repeated 8x
+.0ddb	9c 23 9f	    stz VERA_DATA0 ; $9f23 each `stz` writes four zeroes to VRAM (cache contents) for a total of 32 pixels when repeated 8x
+.0dde	9c 23 9f	    stz VERA_DATA0 ; $9f23 each `stz` writes four zeroes to VRAM (cache contents) for a total of 32 pixels when repeated 8x
+.0de1	9c 23 9f	    stz VERA_DATA0 ; $9f23 each `stz` writes four zeroes to VRAM (cache contents) for a total of 32 pixels when repeated 8x
+.0de4	9c 23 9f	    stz VERA_DATA0 ; $9f23 each `stz` writes four zeroes to VRAM (cache contents) for a total of 32 pixels when repeated 8x
+.0de7	9c 23 9f	    stz VERA_DATA0 ; $9f23 each `stz` writes four zeroes to VRAM (cache contents) for a total of 32 pixels when repeated 8x
+.0dea	9c 23 9f	    stz VERA_DATA0 ; $9f23 each `stz` writes four zeroes to VRAM (cache contents) for a total of 32 pixels when repeated 8x
+.0ded	ca		    dex
+.0dee	d0 e5		    bne blank_loop
+.0df0	88		    dey
+.0df1	d0 e0		    bne blank_outer
+.0df3	a9 04		    lda #(2 << 1)
+.0df5	8d 25 9f	    sta VERA_CTRL ; $9f25
+.0df8	9c 29 9f	    stz VERA_FX_CTRL
+.0dfb	9c 25 9f	    stz VERA_CTRL
+.0dfe	60		    rts
+.0dff			set_pixel:
+.0dff	a5 04		    lda r1L             ; Load y low byte
+.0e01	85 08		    sta r3L
+.0e03	a5 05		    lda r1H
+.0e05	85 09		    sta r3H
+.0e07	a9 50		    lda #$50            ; x 80
+.0e09	85 0a		    sta r4L
+.0e0b	a9 00		    lda #$00
+.0e0d	85 0b		    sta r4H
+.0e0f	20 e1 10	    jsr mult_16x16      ; Multiply by 80
+.0e12	a5 0a		    lda r4L
+.0e14	8d 6f 0e	    sta rowAddrL        ; Store row address low byte
+.0e17	a5 0b		    lda r4H
+.0e19	8d 70 0e	    sta rowAddrM
+.0e1c	a5 08		    lda r3L             ; Load high byte result
+.0e1e	8d 71 0e	    sta rowAddrH        ; Store row address high byte
+.0e21	20 c9 10	    jsr div_16bit_by_8
+.0e24	a5 0c		    lda r5L
+.0e26	8d 72 0e	    sta colAddrL
+.0e29	a5 02		    lda r0L             ; Load x low byte
+.0e2b	29 07		    and #7              ; x % 8 (AND with 7)
+.0e2d	aa		    tax                 ; Transfer to X for index
+.0e2e	18		    clc
+.0e2f	ad 6f 0e	    lda rowAddrL
+.0e32	6d 72 0e	    adc colAddrL
+.0e35	8d 20 9f	    sta VERA_ADDRx_L
+.0e38	ad 70 0e	    lda rowAddrM
+.0e3b	69 00		    adc #$00
+.0e3d	8d 21 9f	    sta VERA_ADDRx_M
+.0e40	ad 71 0e	    lda rowAddrH
+.0e43	8d 22 9f	    sta VERA_ADDRx_H
+.0e46	ad 8b 0d	    lda COLOR
+.0e49	f0 0a		    beq ahead
+.0e4b	ad 23 9f	    lda VERA_DATA0      ; Load the byte at memory address
+.0e4e	1d 5f 0e	    ora bitMasks1,X      ; OR with the bit mask
+.0e51	8d 23 9f	    sta VERA_DATA0      ; Store back the modified byte
+.0e54	60		    rts
+.0e55			ahead:
+.0e55	ad 23 9f	    lda VERA_DATA0      ; Load the byte at memory address
+.0e58	3d 67 0e	    and bitMasks2,X      ; OR with the bit mask
+.0e5b	8d 23 9f	    sta VERA_DATA0      ; Store back the modified byte
+.0e5e	60		    rts
+.0e5f			bitMasks1:
+>0e5f	80 40 20 10	    .byte %10000000, %01000000, %00100000, %00010000
+>0e63	08 04 02 01	    .byte %00001000, %00000100, %00000010, %00000001
+.0e67			bitMasks2:
+>0e67	7f bf df ef	    .byte %01111111, %10111111, %11011111, %11101111
+>0e6b	f7 fb fd fe	    .byte %11110111, %11111011, %11111101, %11111110
+.0e6f			rowAddrL:
+>0e6f	00		    .byte 0
+.0e70			rowAddrM:
+>0e70	00		    .byte 0
+.0e71			rowAddrH:
+>0e71	00		    .byte 0
+.0e72			colAddrL:
+>0e72	00		    .byte 0
+.0e73			set_pixel_pattern:
+.0e73	48		    pha
+.0e74	a5 04		    lda r1L             ; Load y low byte
+.0e76	85 08		    sta r3L
+.0e78	a5 05		    lda r1H
+.0e7a	85 09		    sta r3H
+.0e7c	a9 50		    lda #$50            ; x 80
+.0e7e	85 0a		    sta r4L
+.0e80	a9 00		    lda #$00
+.0e82	85 0b		    sta r4H
+.0e84	20 e1 10	    jsr mult_16x16      ; Multiply by 80
+.0e87	a5 0a		    lda r4L
+.0e89	8d c7 0e	    sta rowAddrL        ; Store row address low byte
+.0e8c	a5 0b		    lda r4H
+.0e8e	8d c8 0e	    sta rowAddrM
+.0e91	a5 08		    lda r3L             ; Load high byte result
+.0e93	8d c9 0e	    sta rowAddrH        ; Store row address high byte
+.0e96	20 c9 10	    jsr div_16bit_by_8
+.0e99	a5 0c		    lda r5L
+.0e9b	8d ca 0e	    sta colAddrL
+.0e9e	18		    clc
+.0e9f	ad c7 0e	    lda rowAddrL
+.0ea2	6d ca 0e	    adc colAddrL
+.0ea5	8d 20 9f	    sta VERA_ADDRx_L
+.0ea8	ad c8 0e	    lda rowAddrM
+.0eab	69 00		    adc #$00
+.0ead	8d 21 9f	    sta VERA_ADDRx_M
+.0eb0	ad c9 0e	    lda rowAddrH
+.0eb3	8d 22 9f	    sta VERA_ADDRx_H
+.0eb6	ad 8b 0d	    lda COLOR
+.0eb9	f0 05		    beq invert
+.0ebb	68		    pla
+.0ebc	8d 23 9f	    sta VERA_DATA0      ; send bit pattern
+.0ebf	60		    rts
+.0ec0			invert:
+.0ec0	68		    pla
+.0ec1	49 ff		    eor #$ff
+.0ec3	8d 23 9f	    sta VERA_DATA0      ; send bit pattern
+.0ec6	60		    rts
+.0ec7			rowAddrL:
+>0ec7	00		    .byte 0
+.0ec8			rowAddrM:
+>0ec8	00		    .byte 0
+.0ec9			rowAddrH:
+>0ec9	00		    .byte 0
+.0eca			colAddrL:
+>0eca	00		    .byte 0
+.0ecb			vertical_line:
+.0ecb	a5 04		    lda r1L
+.0ecd	85 16		    sta r10L
+.0ecf	a5 05		    lda r1H
+.0ed1	85 17		    sta r10H
+.0ed3	a5 06		    lda r2L
+.0ed5	85 18		    sta r11L
+.0ed7	a5 07		    lda r2H
+.0ed9	85 19		    sta r11H
+.0edb			loop:
+.0edb	a5 16		    lda r10L
+.0edd	85 04		    sta r1L
+.0edf	a5 17		    lda r10H
+.0ee1	85 05		    sta r1H
+.0ee3	20 ff 0d	    jsr set_pixel
+.0ee6	18		    clc
+.0ee7	a5 16		    lda r10L
+.0ee9	69 01		    adc #$01
+.0eeb	85 16		    sta r10L
+.0eed	a5 17		    lda r10H
+.0eef	69 00		    adc #$00
+.0ef1	85 17		    sta r10H
+.0ef3	a5 17		    lda r10H
+.0ef5	c5 19		    cmp r11H
+.0ef7	d0 e2		    bne loop
+.0ef9	a5 16		    lda r10L
+.0efb	c5 18		    cmp r11L
+.0efd	d0 dc		    bne loop
+.0eff	60		    rts
+.0f00			horizontal_line:
+.0f00	a5 02		    lda r0L
+.0f02	85 16		    sta r10L
+.0f04	a5 03		    lda r0H
+.0f06	85 17		    sta r10H
+.0f08	a5 06		    lda r2L
+.0f0a	85 18		    sta r11L
+.0f0c	a5 07		    lda r2H
+.0f0e	85 19		    sta r11H
+.0f10			loop:
+.0f10	a5 16		    lda r10L
+.0f12	85 02		    sta r0L
+.0f14	a5 17		    lda r10H
+.0f16	85 03		    sta r0H
+.0f18	20 ff 0d	    jsr set_pixel
+.0f1b	18		    clc
+.0f1c	a5 16		    lda r10L
+.0f1e	69 01		    adc #$01
+.0f20	85 16		    sta r10L
+.0f22	a5 17		    lda r10H
+.0f24	69 00		    adc #$00
+.0f26	85 17		    sta r10H
+.0f28	a5 17		    lda r10H
+.0f2a	c5 19		    cmp r11H
+.0f2c	d0 e2		    bne loop
+.0f2e	a5 16		    lda r10L
+.0f30	c5 18		    cmp r11L
+.0f32	d0 dc		    bne loop
+.0f34	60		    rts
+.0f35			rectangle:
+.0f35	a5 02		    lda r0L
+.0f37	8d e2 0f	    sta tmp_r0
+.0f3a	a5 03		    lda r0H
+.0f3c	8d e3 0f	    sta tmp_r0 + 1
+.0f3f	a5 04		    lda r1L
+.0f41	8d e4 0f	    sta tmp_r1
+.0f44	a5 05		    lda r1H
+.0f46	8d e5 0f	    sta tmp_r1 + 1
+.0f49	a5 06		    lda r2L
+.0f4b	8d e6 0f	    sta tmp_r2
+.0f4e	a5 07		    lda r2H
+.0f50	8d e7 0f	    sta tmp_r2 + 1
+.0f53	a5 08		    lda r3L
+.0f55	8d e8 0f	    sta tmp_r3
+.0f58	a5 09		    lda r3H
+.0f5a	8d e9 0f	    sta tmp_r3 + 1
+.0f5d	ad e2 0f	    lda tmp_r0
+.0f60	85 02		    sta r0L
+.0f62	ad e3 0f	    lda tmp_r0 + 1
+.0f65	85 03		    sta r0H
+.0f67	ad e4 0f	    lda tmp_r1
+.0f6a	85 04		    sta r1L
+.0f6c	ad e5 0f	    lda tmp_r1 + 1
+.0f6f	85 05		    sta r1H
+.0f71	ad e6 0f	    lda tmp_r2
+.0f74	85 06		    sta r2L
+.0f76	ad e7 0f	    lda tmp_r2 + 1
+.0f79	85 07		    sta r2H
+.0f7b	20 00 0f	    jsr horizontal_line
+.0f7e	ad e2 0f	    lda tmp_r0
+.0f81	85 02		    sta r0L
+.0f83	ad e3 0f	    lda tmp_r0 + 1
+.0f86	85 03		    sta r0H
+.0f88	ad e8 0f	    lda tmp_r3
+.0f8b	85 04		    sta r1L
+.0f8d	ad e9 0f	    lda tmp_r3 + 1
+.0f90	85 05		    sta r1H
+.0f92	ad e6 0f	    lda tmp_r2
+.0f95	85 06		    sta r2L
+.0f97	ad e7 0f	    lda tmp_r2 + 1
+.0f9a	85 07		    sta r2H
+.0f9c	20 00 0f	    jsr horizontal_line
+.0f9f	ad e2 0f	    lda tmp_r0
+.0fa2	85 02		    sta r0L
+.0fa4	ad e3 0f	    lda tmp_r0 + 1
+.0fa7	85 03		    sta r0H
+.0fa9	ad e4 0f	    lda tmp_r1
+.0fac	85 04		    sta r1L
+.0fae	ad e5 0f	    lda tmp_r1 + 1
+.0fb1	85 05		    sta r1H
+.0fb3	ad e8 0f	    lda tmp_r3
+.0fb6	85 06		    sta r2L
+.0fb8	ad e9 0f	    lda tmp_r3 + 1
+.0fbb	85 07		    sta r2H
+.0fbd	20 cb 0e	    jsr vertical_line
+.0fc0	ad e6 0f	    lda tmp_r2
+.0fc3	85 02		    sta r0L
+.0fc5	ad e7 0f	    lda tmp_r2 + 1
+.0fc8	85 03		    sta r0H
+.0fca	ad e4 0f	    lda tmp_r1
+.0fcd	85 04		    sta r1L
+.0fcf	ad e5 0f	    lda tmp_r1 + 1
+.0fd2	85 05		    sta r1H
+.0fd4	ad e8 0f	    lda tmp_r3
+.0fd7	85 06		    sta r2L
+.0fd9	ad e9 0f	    lda tmp_r3 + 1
+.0fdc	85 07		    sta r2H
+.0fde	20 cb 0e	    jsr vertical_line
+.0fe1	60		    rts
+.0fe2			tmp_r0:
+>0fe2	00 00		    .byte $00, $00
+.0fe4			tmp_r1:
+>0fe4	00 00		    .byte $00, $00
+.0fe6			tmp_r2:
+>0fe6	00 00		    .byte $00, $00
+.0fe8			tmp_r3:
+>0fe8	00 00		    .byte $00, $00
+.0fea			draw_icon:
+.0fea	18		    clc
+.0feb	a5 02		    lda r0L
+.0fed	85 20		    sta r15L
+.0fef	a5 03		    lda r0H
+.0ff1	85 21		    sta r15H
+.0ff3	a0 04		    ldy #$04
+.0ff5	b1 20		    lda (r15L), y
+.0ff7	8d ac 10	    sta org_width
+.0ffa	a0 00		    ldy #$00
+.0ffc	b1 20		    lda (r15L), y
+.0ffe	8d aa 10	    sta curY
+.1001	a0 01		    ldy #$01
+.1003	b1 20		    lda (r15L), y
+.1005	8d ab 10	    sta curY + 1
+.1008	a0 02		    ldy #$02
+.100a	b1 20		    lda (r15L), y
+.100c	8d a8 10	    sta curX
+.100f	8d a6 10	    sta orig_X
+.1012	a0 03		    ldy #$03
+.1014	b1 20		    lda (r15L), y
+.1016	8d a9 10	    sta curX + 1
+.1019	8d a7 10	    sta orig_X + 1
+.101c	a9 09		    lda #$09                ; prepare the index to the image data
+.101e	8d af 10	    sta byteIdx
+.1021	a0 04		    ldy #$04
+.1023	b1 20		    lda (r15L), y
+.1025	8d ad 10	    sta tmp_width_ctr
+.1028	a0 05		    ldy #$05
+.102a	b1 20		    lda (r15L), y
+.102c	8d ae 10	    sta tmp_height_ctr
+.102f	ad a8 10	    lda curX
+.1032	85 02		    sta r0L
+.1034	ad a9 10	    lda curX + 1
+.1037	85 03		    sta r0H
+.1039	ad aa 10	    lda curY
+.103c	85 04		    sta r1L
+.103e	ad ab 10	    lda curY + 1
+.1041	85 05		    sta r1H
+.1043			loop:
+.1043	ad a8 10	    lda curX                ; r0 = curX
+.1046	85 02		    sta r0L
+.1048	ad a9 10	    lda curX+1
+.104b	85 03		    sta r0H
+.104d	ad aa 10	    lda curY                ; r1 = curY
+.1050	85 04		    sta r1L
+.1052	ad ab 10	    lda curY+1
+.1055	85 05		    sta r1H
+.1057	ac af 10	    ldy byteIdx             ; A = pixel pattern
+.105a	b1 20		    lda (r15L), y
+.105c	20 73 0e	    jsr set_pixel_pattern   ; write pixel pattern to screen
+.105f	ee af 10	    inc byteIdx             ; byteIdx++
+.1062	ce ad 10	    dec tmp_width_ctr       ; tmp_width_ctr--
+.1065	18		    clc                     ; curX = curX + 8
+.1066	ad a8 10	    lda curX
+.1069	69 08		    adc #$08
+.106b	8d a8 10	    sta curX
+.106e	ad a9 10	    lda curX + 1
+.1071	69 00		    adc #$00
+.1073	8d a9 10	    sta curX + 1
+.1076	ad ad 10	    lda tmp_width_ctr       ; IF tmp_width_ctr > 0, repeat inner loop
+.1079	d0 c8		    bne loop
+.107b	ad ac 10	    lda org_width           ; ELSE reset tmp_width_ctr
+.107e	8d ad 10	    sta tmp_width_ctr
+.1081	ad a6 10	    lda orig_X              ; reset curX for next line
+.1084	8d a8 10	    sta curX
+.1087	ad a7 10	    lda orig_X + 1
+.108a	8d a9 10	    sta curX + 1
+.108d	ad aa 10	    lda curY                ; curY = curY + 1
+.1090	69 01		    adc #$01
+.1092	8d aa 10	    sta curY
+.1095	ad ab 10	    lda curY + 1
+.1098	69 00		    adc #$00
+.109a	8d ab 10	    sta curY + 1
+.109d	ce ae 10	    dec tmp_height_ctr      ; tmp_height_ctr--
+.10a0	ad ae 10	    lda tmp_height_ctr      ; if tmp_height_ctr > 0, repeat outer loop
+.10a3	d0 9e		    bne loop
+.10a5	60		    rts
+.10a6			orig_X:
+>10a6	00 00		.byte $00, $00
+.10a8			curX:
+>10a8	00 00		.byte $00, $00
+.10aa			curY:
+>10aa	00 00		.byte $00, $00
+.10ac			org_width:
+>10ac	00		.byte $00
+.10ad			tmp_width_ctr:
+>10ad	00		.byte $00
+.10ae			tmp_height_ctr:
+>10ae	00		.byte $00
+.10af			byteIdx:
+>10af	00		.byte $00
+.10b0			bit_test:
+.10b0	a8		    tay             ; Transfer the bit number from A to Y for shifting
+.10b1	a9 01		    lda #$01        ; Start with bit mask 00000001
+.10b3			loop:
+.10b3	85 16		    sta r10L
+.10b5	88		    dey             ; Decrement Y (bit counter)
+.10b6	10 04		    bpl apply_mask  ; If Y is zero, we have our bit mask
+.10b8	0a		    asl             ; Shift the bit mask left
+.10b9	4c b3 10	    jmp loop
+.10bc			apply_mask:
+.10bc	8a		    txa
+.10bd	25 16		    and r10L
+.10bf	f0 05		    beq bit_clear   ; If result is zero, the bit is not set
+.10c1	a9 01		    lda #$01        ; Set A to 1 (bit is set)
+.10c3	4c c8 10	    jmp done        ; Jump to DONE
+.10c6			bit_clear:
+.10c6	a9 00		    lda #$00        ; Set A to 0 (bit not set)
+.10c8			done:
+.10c8	60		    rts             ; Return from subroutine
+.10c9			div_16bit_by_8:
+.10c9	a5 02		    lda r0l             ; load x low byte
+.10cb	85 0c		    sta r5l             ; store low byte in templ
+.10cd	a5 03		    lda r0h             ; load x high byte
+.10cf	85 0d		    sta r5h             ; store high byte in temph
+.10d1	a2 03		    ldx #3              ; set loop counter to 3
+.10d3			shift_loop:
+.10d3	a5 0d		    lda r5h             ; load high byte
+.10d5	4a		    lsr a               ; logical shift right
+.10d6	85 0d		    sta r5h             ; store shifted high byte
+.10d8	a5 0c		    lda r5l             ; load low byte
+.10da	6a		    ror a               ; rotate right through carry (bringing in bit from high byte)
+.10db	85 0c		    sta r5l             ; store shifted low byte
+.10dd	ca		    dex                 ; decrement loop counter
+.10de	d0 f3		    bne shift_loop      ; repeat 3 times
+.10e0	60		    rts                 ; return from subroutine
+.10e1			mult_16x16:
+.10e1	64 0c		    stz r5l
+.10e3	64 0d		    stz r5h
+.10e5	a5 0a		    lda r4l    ; get the multiplicand and
+.10e7	85 0c		    sta r5l    ; put it in the scratchpad.
+.10e9	a5 0b		    lda r4h
+.10eb	85 0d		    sta r5h
+.10ed	a9 00		    lda #$00
+.10ef	85 0a		    sta r4l    ; zero-out the original multiplicand area.
+.10f1	85 0b		    sta r4h
+.10f3	a0 10		    ldy #$10   ; we'll loop 16 times.
+.10f5			lp1:
+.10f5	06 0a		    asl r4l    ; shift the entire 32 bits over one bit position.
+.10f7	26 0b		    rol r4h
+.10f9	26 08		    rol r3l
+.10fb	26 09		    rol r3h
+.10fd	90 13		    bcc lp2    ; skip the adding-in to the result if
+.10ff	18		    clc        ; else, add multiplier to intermediate result.
+.1100	a5 0c		    lda r5l
+.1102	65 0a		    adc r4l
+.1104	85 0a		    sta r4l
+.1106	a5 0d		    lda r5h
+.1108	65 0b		    adc r4h
+.110a	85 0b		    sta r4h
+.110c	a9 00		    lda #$00   ; if c=1, incr lo byte of hi cell.
+.110e	65 08		    adc r3l
+.1110	85 08		    sta r3l
+.1112			lp2:
+.1112	88		    dey        ; if we haven't done 16 iterations yet,
+.1113	d0 e0		    bne lp1    ; then go around again.
+.1115	60		    rts
+
+;******  Return to file: ./src/x16_demo1.asm
+
+
+;******  End of listing

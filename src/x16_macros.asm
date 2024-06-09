@@ -51,6 +51,31 @@ LoadRect .macro X1, Y1, X2, Y2
     sta r3H
 .endm
 
+DrawRect .macro X1, Y1, X2, Y2
+    lda #<\X1
+    sta r0L
+    lda #>\X1
+    sta r0H
+
+    lda #<\Y1
+    sta r1L
+    lda #>\Y1
+    sta r1H
+
+    lda #<\X2
+    sta r2L
+    lda #>\X2
+    sta r2H
+
+    lda #<\Y2
+    sta r3L
+    lda #>\Y2
+    sta r3H
+    
+    jsr rectangle
+.endm
+
+
 LoadHLine .macro X1, Y1, X2
     lda #<\X1
     sta r0L
@@ -66,4 +91,28 @@ LoadHLine .macro X1, Y1, X2
     sta r2L
     lda #>\X2
     sta r2H
+.endm
+
+DrawHLine .macro X1, Y1, X2
+    lda #<\X1
+    sta r0L
+    lda #>\X1
+    sta r0H
+
+    lda #<\Y1
+    sta r1L
+    lda #>\Y1
+    sta r1H
+
+    lda #<\X2
+    sta r2L
+    lda #>\X2
+    sta r2H
+
+    jsr horizontal_line
+.endm
+
+SetColor .macro color
+    lda #\color
+    sta COLOR
 .endm
